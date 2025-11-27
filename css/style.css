@@ -24,6 +24,13 @@ body {
     line-height: 1.6;
     color: var(--text-dark);
     background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
 }
 
 .container {
@@ -331,6 +338,7 @@ body {
     max-width: 900px;
     margin: 4rem auto;
     padding: 2rem;
+    min-height: calc(100vh - 400px);
 }
 
 .cart-items {
@@ -561,7 +569,7 @@ body {
 
 /* Footer */
 footer {
-    background-color: var(--dark-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: var(--white);
     text-align: center;
     padding: 2rem 0;
