@@ -14,7 +14,10 @@
                 <div class="logo">
                     <img src="images/logo.png" alt="Café de Olla">
                 </div>
-                <ul class="nav-menu">
+                <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+                    ☰
+                </button>
+                <ul class="nav-menu" id="navMenu">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="menu.html">Menu</a></li>
                     <li><a href="index.html#about">About</a></li>
@@ -28,8 +31,9 @@
             </div>
         </nav>
     </header>
-<main>
+
     <!-- Cart Content -->
+    <main>
     <div class="cart-container">
         <h2>Your Cart</h2>
         
@@ -65,7 +69,7 @@
                     </select>
                 </div>
 
-<!-- Shipping/Delivery Form -->
+                <!-- Shipping/Delivery Form -->
                 <div class="shipping-form" id="address-form">
                     <div class="address-form-header">
                         <h4>📍 Where should we send your coffee?</h4>
@@ -111,6 +115,8 @@
                         </div>
                     </div>
                 </div>
+            </form>
+        </div>
 
         <!-- Cart Summary -->
         <div class="cart-summary" id="cart-summary" style="display: none;">
@@ -128,7 +134,8 @@
             </button>
         </div>
     </div>
-</main>
+    </main>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -139,5 +146,22 @@
 
     <script src="js/menu.js"></script>
     <script src="js/cart.js"></script>
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>

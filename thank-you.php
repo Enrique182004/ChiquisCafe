@@ -54,7 +54,10 @@
                 <div class="logo">
                     <img src="images/logo.png" alt="Café de Olla">
                 </div>
-                <ul class="nav-menu">
+                <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+                    ☰
+                </button>
+                <ul class="nav-menu" id="navMenu">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="menu.html">Menu</a></li>
                     <li><a href="index.html#about">About</a></li>
@@ -116,5 +119,23 @@
             <p>Email: [email protected]</p>
         </div>
     </footer>
+    
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
