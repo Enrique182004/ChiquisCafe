@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Café de Olla</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <img src="images/logo.png" alt="Café de Olla">
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-link">
+                            🛒 Cart (<span id="cart-count">0</span>)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Cart Content -->
+    <div class="cart-container">
+        <h2>Your Cart</h2>
+        
+        <div id="cart-content">
+            <!-- Cart items will be loaded here -->
+        </div>
+
+        <!-- Fulfillment Options -->
+        <div class="fulfillment-options" id="fulfillment-section" style="display: none;">
+            <h3>How would you like to receive your order?</h3>
+            <form id="fulfillment-form">
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="fulfillment" value="PICKUP" checked>
+                        <span>🚗 Pickup - I'll pick it up at your location</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="fulfillment" value="DELIVERY">
+                        <span>🚚 Local Delivery - Deliver to my address (El Paso area)</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="fulfillment" value="SHIPMENT">
+                        <span>📦 Shipping - Ship to my address</span>
+                    </label>
+                </div>
+
+                <!-- Location Selection for Pickup -->
+                <div class="form-group" id="pickup-location" style="margin-top: 1rem;">
+                    <label for="location">Pickup Location:</label>
+                    <select id="location" name="location">
+                        <option value="LZ8GQYSRJ8QRV">Chiquis Cafe de Olla (Main) - 2050 Trawood Dr.</option>
+                        <option value="L6CGBKNZBHZX8">Cafe de Olla - Airport Pickup - 6701 Convair Rd</option>
+                    </select>
+                </div>
+
+<!-- Shipping/Delivery Form -->
+                <div class="shipping-form" id="address-form">
+                    <div class="address-form-header">
+                        <h4>📍 Where should we send your coffee?</h4>
+                        <p class="form-subtitle">We'll deliver your delicious Café de Olla right to your door!</p>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">👤 Full Name</label>
+                            <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">📞 Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="(915) 555-1234" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">📧 Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="[email protected]" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">🏠 Street Address</label>
+                        <input type="text" id="address" name="address" placeholder="123 Main Street, Apt 4B" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">🌆 City</label>
+                            <input type="text" id="city" name="city" placeholder="El Paso" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="state">📍 State</label>
+                            <input type="text" id="state" name="state" value="TX" placeholder="TX" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="zipCode">📮 Zip Code</label>
+                            <input type="text" id="zipCode" name="zipCode" placeholder="79901" required>
+                        </div>
+                    </div>
+                </div>
+
+        <!-- Cart Summary -->
+        <div class="cart-summary" id="cart-summary" style="display: none;">
+            <h3>Order Summary</h3>
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span id="subtotal">$0.00</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total:</span>
+                <span id="total">$0.00</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="proceedToCheckout(event)">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Café de Olla by Chiquis. All rights reserved.</p>
+            <p>Email: [email protected]</p>
+        </div>
+    </footer>
+
+    <script src="js/menu.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

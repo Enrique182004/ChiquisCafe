@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Café de Olla</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <img src="images/logo.png" alt="Café de Olla">
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-link">
+                            🛒 Cart (<span id="cart-count">0</span>)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Menu Section -->
+    <section class="featured">
+        <div class="container">
+            <h2>Our Coffee Selection</h2>
+            <div class="product-grid" id="menu-products">
+                <!-- Products will be loaded here via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Café de Olla by Chiquis. All rights reserved.</p>
+            <p>Email: [email protected]</p>
+        </div>
+    </footer>
+
+    <script src="js/menu.js"></script>
+    <script>
+        // Load all products
+        loadProducts('menu-products', false);
+    </script>
+</body>
+</html>
