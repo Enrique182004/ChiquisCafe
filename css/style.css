@@ -64,6 +64,7 @@ a, button, input, select {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 20px;
+    position: relative;
 }
 
 .logo h1 {
@@ -106,10 +107,11 @@ a, button, input, select {
     display: none;
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     cursor: pointer;
     color: var(--primary-color);
     padding: 0.5rem;
+    z-index: 1001;
 }
 
 @media (max-width: 768px) {
@@ -125,9 +127,10 @@ a, button, input, select {
         right: 0;
         background: var(--white);
         flex-direction: column;
-        padding: 1rem;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        gap: 1rem;
+        padding: 1rem 0;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        gap: 0;
+        margin: 0;
     }
     
     .nav-menu.active {
@@ -137,11 +140,22 @@ a, button, input, select {
     .nav-menu li {
         width: 100%;
         text-align: center;
+        border-bottom: 1px solid var(--light-pink);
+    }
+    
+    .nav-menu li:last-child {
+        border-bottom: none;
     }
     
     .nav-menu a {
         display: block;
-        padding: 0.5rem;
+        padding: 1rem;
+        width: 100%;
+    }
+    
+    .cart-link {
+        border-radius: 0;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-pink));
     }
 }
 
@@ -644,32 +658,9 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
-    /* Navigation */
-    .navbar .container {
-        flex-wrap: wrap;
-        padding: 0.5rem 20px;
-    }
-    
+    /* Logo */
     .logo img {
         height: 50px;
-    }
-    
-    .nav-menu {
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        font-size: 0.9rem;
-        width: 100%;
-        justify-content: center;
-        margin-top: 0.5rem;
-    }
-    
-    .nav-menu li {
-        margin: 0.25rem;
-    }
-    
-    .cart-link {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.85rem;
     }
     
     /* Hero */
@@ -874,10 +865,6 @@ footer {
     
     .logo img {
         height: 40px;
-    }
-    
-    .nav-menu {
-        font-size: 0.85rem;
     }
     
     .cart-container h2 {
