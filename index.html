@@ -15,7 +15,7 @@
             </div>
             
             <h1>¡Bienvenidos!</h1>
-            <p>Welcome to Chiquis Cafe de Olla! Enter your zip code to check delivery and pickup options.</p>
+            <p>Welcome to<br><strong style="font-size: 1.2em; color: var(--primary-color);">Chiquis Cafe de Olla</strong><br>Enter your zip code to check delivery and pickup options.</p>
             
             <div class="zip-input-group">
                 <label for="zipCode">📍 Your Zip Code</label>
@@ -68,12 +68,12 @@
                 // Redirect to main site after 4 seconds
                 setTimeout(() => {
                     window.location.href = 'pages/home.html';
-                }, 7000);
+                }, 4000);
                 
             } else {
                 alertBox.className = 'alert-box alert-warning show';
                 alertBox.innerHTML = `
-                    <h3>📦 Shipping Available</h3>
+                    <h3>📦 <strong style="color: #000;">Shipping Available</strong></h3>
                     <p>Pickup and delivery only available in El Paso (799xx). Shipping available to your area.</p>
                 `;
                 
@@ -84,7 +84,7 @@
                 // Redirect to main site after 5 seconds
                 setTimeout(() => {
                     window.location.href = 'pages/home.html';
-                }, 7000);
+                }, 5000);
             }
         }
         
