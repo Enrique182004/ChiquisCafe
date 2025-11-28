@@ -63,24 +63,25 @@ a, button, input, select {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 20px;
+    padding: 1.5rem 20px;
     position: relative;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .logo h1 {
     color: var(--primary-color);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin: 0;
+    white-space: nowrap;
 }
 
 .logo img {
-    height: 90px;
+    height: 110px;
     width: auto;
 }
 
@@ -667,11 +668,15 @@ footer {
 @media (max-width: 768px) {
     /* Logo */
     .logo img {
-        height: 60px;
+        height: 70px;
     }
     
     .logo h1 {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
+    }
+    
+    .logo {
+        gap: 1rem;
     }
     
     /* Hero */
