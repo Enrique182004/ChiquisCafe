@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café de Olla - Delivery Area Check</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .zip-check-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--light-pink), var(--white));
+            padding: 2rem;
+        }
+        
+        .zip-check-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(184, 69, 125, 0.2);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border: 3px solid var(--accent-pink);
+        }
+        
+        .zip-check-logo {
+            margin-bottom: 2rem;
+        }
+        
+        .zip-check-logo img {
+            height: 120px;
+            width: auto;
+            margin: 0 auto;
+        }
+        
+        .zip-check-card h1 {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .zip-check-card p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .zip-input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .zip-input-group label {
+            display: block;
+            text-align: left;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+        
+        .zip-input-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1.2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .zip-input-group input:focus {
+            outline: none;
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 0 4px rgba(184, 69, 125, 0.15);
+        }
+        
+        .zip-check-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .alert-box {
+            display: none;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            text-align: left;
+        }
+        
+        .alert-box.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        .alert-warning {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            color: #856404;
+        }
+        
+        .alert-info {
+            background: var(--light-pink);
+            border: 2px solid var(--accent-pink);
+            color: var(--secondary-color);
+        }
+        
+        .alert-box h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .alert-box p {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .alert-box ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .alert-box li {
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .zip-check-card {
+                padding: 2rem;
+            }
+            
+            .zip-check-card h1 {
+                font-size: 2rem;
+            }
+            
+            .zip-check-logo img {
+                height: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="zip-check-container">
+        <div class="zip-check-card">
+            <div class="zip-check-logo">
+                <img src="images/logo.png" alt="Café de Olla">
+            </div>
+            
+            <h1>¡Bienvenidos!</h1>
+            <p>Welcome to Chiquis Cafe de Olla! Enter your zip code to check delivery and pickup options.</p>
+            
+            <div class="zip-input-group">
+                <label for="zipCode">📍 Your Zip Code</label>
+                <input 
+                    type="text" 
+                    id="zipCode" 
+                    placeholder="79901" 
+                    maxlength="5"
+                    pattern="[0-9]{5}"
+                    required
+                >
+            </div>
+            
+            <button class="btn btn-primary zip-check-btn" onclick="checkZipCode()">
+                Check Availability
+            </button>
+            
+            <div id="alertBox" class="alert-box"></div>
+        </div>
+    </div>
+    
+    <script>
+        function checkZipCode() {
+            const zipInput = document.getElementById('zipCode');
+            const zipCode = zipInput.value.trim();
+            const alertBox = document.getElementById('alertBox');
+            
+            // Validate zip code format
+            if (zipCode.length !== 5 || !/^\d{5}$/.test(zipCode)) {
+                alertBox.className = 'alert-box alert-warning show';
+                alertBox.innerHTML = `
+                    <h3>⚠️ Invalid Zip Code</h3>
+                    <p>Please enter a valid 5-digit zip code.</p>
+                `;
+                return;
+            }
+            
+            // Check if El Paso area (799xx)
+            if (zipCode.startsWith('799')) {
+                alertBox.className = 'alert-box alert-info show';
+                alertBox.innerHTML = `
+                    <h3>🎉 ¡Perfecto! You're in our delivery area!</h3>
+                    <p><strong>Available options for ${zipCode}:</strong></p>
+                    <ul>
+                        <li>✅ <strong>Pickup</strong> - Pick up at our El Paso locations</li>
+                        <li>✅ <strong>Local Delivery</strong> - We deliver to your door!</li>
+                        <li>✅ <strong>Shipping</strong> - Available nationwide</li>
+                    </ul>
+                `;
+                
+                // Save zip code to localStorage
+                localStorage.setItem('userZipCode', zipCode);
+                localStorage.setItem('deliveryArea', 'el-paso');
+                
+                // Redirect to main site after 3 seconds
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 3000);
+                
+            } else {
+                alertBox.className = 'alert-box alert-warning show';
+                alertBox.innerHTML = `
+                    <h3>📦 Shipping Only Available</h3>
+                    <p><strong>Zip code ${zipCode} is outside El Paso area.</strong></p>
+                    <p>🚗 <strong>Pickup</strong> and 🚚 <strong>Local Delivery</strong> are only available for El Paso, TX (zip codes starting with 799).</p>
+                    <p>However, you can still order with:</p>
+                    <ul>
+                        <li>✅ <strong>Nationwide Shipping</strong> - We'll ship to your address!</li>
+                    </ul>
+                `;
+                
+                // Save zip code to localStorage
+                localStorage.setItem('userZipCode', zipCode);
+                localStorage.setItem('deliveryArea', 'outside');
+                
+                // Redirect to main site after 5 seconds
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 5000);
+            }
+        }
+        
+        // Allow Enter key to submit
+        document.getElementById('zipCode').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                checkZipCode();
+            }
+        });
+        
+        // Auto-focus on zip code input
+        window.onload = function() {
+            document.getElementById('zipCode').focus();
+        };
+    </script>
+</body>
+</html>

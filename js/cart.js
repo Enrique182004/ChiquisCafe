@@ -48,6 +48,9 @@ function displayCart() {
     
     cartSummary.style.display = 'block';
     fulfillmentSection.style.display = 'block';
+    
+    // Check delivery area and update options
+    checkDeliveryArea();
 }
 
 // Handle fulfillment type changes
@@ -197,4 +200,45 @@ function showToast(message) {
             toast.remove();
         }, 300);
     }, 4000);
+}
+
+// Check delivery area based on zip code
+function checkDeliveryArea() {
+    const deliveryArea = localStorage.getItem('deliveryArea');
+    const userZipCode = localStorage.getItem('userZipCode');
+    
+    const pickupOption = document.querySelector('input[value="PICKUP"]');
+    const deliveryOption = document.querySelector('input[value="DELIVERY"]');
+    const shipmentOption = document.querySelector('input[value="SHIPMENT"]');
+    
+    if (deliveryArea === 'outside') {
+        // Hide pickup and delivery options
+        if (pickupOption && pickupOption.parentElement) {
+            pickupOption.parentElement.style.display = 'none';
+        }
+        if (deliveryOption && deliveryOption.parentElement) {
+            deliveryOption.parentElement.style.display = 'none';
+        }
+        
+        // Select shipment by default
+        if (shipmentOption) {
+            shipmentOption.checked = true;
+            // Trigger change event to show address form
+            const event = new Event('change');
+            shipmentOption.dispatchEvent(event);
+        }
+        
+        // Add notification
+        const fulfillmentOptions = document.querySelector('.fulfillment-options');
+        if (fulfillmentOptions && !document.getElementById('zip-notice')) {
+            const notice = document.createElement('div');
+            notice.id = 'zip-notice';
+            notice.style.cssText = 'background: #fff3cd; border: 2px solid #ffc107; padding: 1rem; border-radius: 10px; margin-bottom: 1rem; color: #856404;';
+            notice.innerHTML = `
+                <strong>📦 Shipping Only for Zip Code ${userZipCode}</strong><br>
+                Pickup and Local Delivery are only available in El Paso, TX (799xx zip codes).
+            `;
+            fulfillmentOptions.insertBefore(notice, fulfillmentOptions.firstChild);
+        }
+    }
 }
