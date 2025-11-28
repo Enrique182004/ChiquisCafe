@@ -1,4 +1,6 @@
 /* Reset and Base Styles */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -20,7 +22,7 @@
 }
 
 body {
-    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-family: 'Poppins', 'Arial', 'Helvetica', sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
     background-color: var(--white);
@@ -74,10 +76,16 @@ a, button, input, select {
 }
 
 .logo h1 {
-    color: var(--primary-color);
-    font-size: 1.8rem;
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2rem;
     margin: 0;
     white-space: nowrap;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 .logo img {
@@ -880,7 +888,15 @@ footer {
     }
     
     .logo img {
-        height: 40px;
+        height: 55px;
+    }
+    
+    .logo h1 {
+        font-size: 1.1rem;
+    }
+    
+    .logo {
+        gap: 0.8rem;
     }
     
     .cart-container h2 {
