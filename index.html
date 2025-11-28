@@ -65,10 +65,10 @@
                 localStorage.setItem('userZipCode', zipCode);
                 localStorage.setItem('deliveryArea', 'el-paso');
                 
-                // Redirect to main site after 2 seconds
+                // Redirect to main site after 4 seconds
                 setTimeout(() => {
                     window.location.href = 'pages/home.html';
-                }, 2000);
+                }, 7000);
                 
             } else {
                 alertBox.className = 'alert-box alert-warning show';
@@ -81,10 +81,10 @@
                 localStorage.setItem('userZipCode', zipCode);
                 localStorage.setItem('deliveryArea', 'outside');
                 
-                // Redirect to main site after 3 seconds
+                // Redirect to main site after 5 seconds
                 setTimeout(() => {
                     window.location.href = 'pages/home.html';
-                }, 3000);
+                }, 7000);
             }
         }
         
