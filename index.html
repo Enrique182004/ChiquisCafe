@@ -3,133 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Café de Olla - Traditional Mexican Coffee</title>
+    <title>Café de Olla - Delivery Area Check</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/zip-check.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav class="navbar">
-            <div class="container">
-                <div class="logo">
-                    <img src="images/logo.png" alt="Café de Olla">
-                    <h1>Chiquis Cafe de Olla</h1>
-                </div>
-                <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
-                    ☰
-                </button>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="menu.html">Menu</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li>
-                        <a href="cart.html" class="cart-link">
-                            🛒 Cart (<span id="cart-count">0</span>)
-                        </a>
-                    </li>
-                </ul>
+    <div class="zip-check-container">
+        <div class="zip-check-card">
+            <div class="zip-check-logo">
+                <img src="images/logo.png" alt="Café de Olla">
             </div>
-        </nav>
-    </header>
-
-    <main>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h2>Traditional Mexican Coffee</h2>
-            <p>Café de Olla - Brewed with cinnamon, piloncillo, and love</p>
-            <a href="menu.html" class="btn btn-primary">Order Now</a>
-        </div>
-    </section>
-
-    <!-- Featured Products -->
-    <section class="featured">
-        <div class="container">
-            <h2>Featured Items</h2>
-            <div class="product-grid" id="featured-products">
-                <!-- Products will be loaded here via JavaScript -->
+            
+            <h1>¡Bienvenidos!</h1>
+            <p>Welcome to Chiquis Cafe de Olla! Enter your zip code to check delivery and pickup options.</p>
+            
+            <div class="zip-input-group">
+                <label for="zipCode">📍 Your Zip Code</label>
+                <input 
+                    type="text" 
+                    id="zipCode" 
+                    placeholder="79901" 
+                    maxlength="5"
+                    pattern="[0-9]{5}"
+                    required
+                >
             </div>
+            
+            <button class="btn btn-primary zip-check-btn" onclick="checkZipCode()">
+                Check Availability
+            </button>
+            
+            <div id="alertBox" class="alert-box"></div>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2>About Café de Olla</h2>
-            <p>Experience authentic Mexican coffee, brewed the traditional way in clay pots with cinnamon sticks and piloncillo (unrefined cane sugar). Our Café de Olla captures the rich, warm flavors that have been cherished in Mexican homes for generations. Each batch is carefully prepared to bring you the perfect balance of sweet, spicy, and aromatic coffee.</p>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services">
-        <div class="container">
-            <h2>How to Order</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>🚗 Pickup</h3>
-                    <p>Order online and pick up at any of our locations</p>
-                </div>
-                <div class="service-card">
-                    <h3>🚚 Delivery</h3>
-                    <p>We deliver to your door in the El Paso area</p>
-                </div>
-                <div class="service-card">
-                    <h3>📦 Shipping</h3>
-                    <p>Select items available for nationwide shipping</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Where to Find Us</h2>
-            <div class="locations-grid">
-                <div class="location-card">
-                    <h3>Chiquis Cafe de Olla (Main)</h3>
-                    <p>2050 Trawood Dr., Suite 4<br>El Paso, TX</p>
-                    <p>📞 915-691-5937</p>
-                </div>
-                <div class="location-card">
-                    <h3>Airport Pickup Location</h3>
-                    <p>6701 Convair Rd Ste Y<br>El Paso, TX</p>
-                    <p>📞 915-691-5937</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Café de Olla by Chiquis. All rights reserved.</p>
-            <p>Email: [email protected]</p>
-        </div>
-    </footer>
-
-    <script src="js/menu.js"></script>
+    </div>
+    
     <script>
-        // Update cart count on page load
-        updateCartCount();
-        
-        // Mobile menu toggle
-        function toggleMenu() {
-            const navMenu = document.getElementById('navMenu');
-            navMenu.classList.toggle('active');
+        function checkZipCode() {
+            const zipInput = document.getElementById('zipCode');
+            const zipCode = zipInput.value.trim();
+            const alertBox = document.getElementById('alertBox');
+            
+            // Validate zip code format
+            if (zipCode.length !== 5 || !/^\d{5}$/.test(zipCode)) {
+                alertBox.className = 'alert-box alert-warning show';
+                alertBox.innerHTML = `
+                    <h3>⚠️ Invalid Zip Code</h3>
+                    <p>Please enter a valid 5-digit zip code.</p>
+                `;
+                return;
+            }
+            
+            // Check if El Paso area (799xx)
+            if (zipCode.startsWith('799')) {
+                alertBox.className = 'alert-box alert-info show';
+                alertBox.innerHTML = `
+                    <h3>✅ Local Delivery Available!</h3>
+                    <p>Pickup and delivery available in El Paso.</p>
+                `;
+                
+                // Save zip code to localStorage
+                localStorage.setItem('userZipCode', zipCode);
+                localStorage.setItem('deliveryArea', 'el-paso');
+                
+                // Redirect to main site after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'pages/home.html';
+                }, 2000);
+                
+            } else {
+                alertBox.className = 'alert-box alert-warning show';
+                alertBox.innerHTML = `
+                    <h3>📦 Shipping Available</h3>
+                    <p>Pickup and delivery only available in El Paso (799xx). Shipping available to your area.</p>
+                `;
+                
+                // Save zip code to localStorage
+                localStorage.setItem('userZipCode', zipCode);
+                localStorage.setItem('deliveryArea', 'outside');
+                
+                // Redirect to main site after 3 seconds
+                setTimeout(() => {
+                    window.location.href = 'pages/home.html';
+                }, 3000);
+            }
         }
         
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const navMenu = document.getElementById('navMenu');
-            const menuToggle = document.querySelector('.menu-toggle');
-            
-            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
-                navMenu.classList.remove('active');
+        // Allow Enter key to submit
+        document.getElementById('zipCode').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                checkZipCode();
             }
         });
+        
+        // Auto-focus on zip code input
+        window.onload = function() {
+            document.getElementById('zipCode').focus();
+        };
     </script>
 </body>
 </html>

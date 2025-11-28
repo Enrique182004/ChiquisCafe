@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Confirmed - Café de Olla</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <style>
         .confirmation-container {
             max-width: 800px;
@@ -52,23 +52,24 @@
         <nav class="navbar">
             <div class="container">
                 <div class="logo">
-                    <img src="images/logo.png" alt="Café de Olla">
+                    <img src="../images/logo.png" alt="Café de Olla">
                     <h1>Chiquis Cafe de Olla</h1>
                 </div>
                 <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
                     ☰
                 </button>
                 <ul class="nav-menu" id="navMenu">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home.html">Home</a></li>
                     <li><a href="menu.html">Menu</a></li>
-                    <li><a href="index.html#about">About</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="home.html#about">About</a></li>
+                    <li><a href="home.html#contact">Contact</a></li>
                 </ul>
             </div>
         </nav>
     </header>
 
     <!-- Confirmation Content -->
+    <main>
     <div class="confirmation-container">
         <div class="success-icon">✓</div>
         <h1>Order Confirmed!</h1>
@@ -103,7 +104,7 @@
             
             <div style="margin-top: 2rem;">
                 <a href="menu.html" class="btn btn-primary">Order Again</a>
-                <a href="index.html" class="btn btn-secondary" style="margin-left: 1rem;">Back to Home</a>
+                <a href="home.html" class="btn btn-secondary" style="margin-left: 1rem;">Back to Home</a>
             </div>
         </div>
         
@@ -112,6 +113,7 @@
             <p>Contact us at <strong>915-691-5937</strong> or <strong>[email protected]</strong></p>
         </div>
     </div>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -121,22 +123,6 @@
         </div>
     </footer>
     
-    <script>
-        // Mobile menu toggle
-        function toggleMenu() {
-            const navMenu = document.getElementById('navMenu');
-            navMenu.classList.toggle('active');
-        }
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const navMenu = document.getElementById('navMenu');
-            const menuToggle = document.querySelector('.menu-toggle');
-            
-            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
-                navMenu.classList.remove('active');
-            }
-        });
-    </script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

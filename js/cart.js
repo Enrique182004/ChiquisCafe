@@ -144,7 +144,7 @@ async function proceedToCheckout(event) {
     
     try {
         // Send to backend to create Square order and payment link
-        const response = await fetch('api/create-order.php', {
+        const response = await fetch('../api/create-order.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -235,8 +235,8 @@ function checkDeliveryArea() {
             notice.id = 'zip-notice';
             notice.style.cssText = 'background: #fff3cd; border: 2px solid #ffc107; padding: 1rem; border-radius: 10px; margin-bottom: 1rem; color: #856404;';
             notice.innerHTML = `
-                <strong>📦 Shipping Only for Zip Code ${userZipCode}</strong><br>
-                Pickup and Local Delivery are only available in El Paso, TX (799xx zip codes).
+                <strong>📦 Shipping Only</strong><br>
+                Pickup and delivery available in El Paso only (799xx).
             `;
             fulfillmentOptions.insertBefore(notice, fulfillmentOptions.firstChild);
         }

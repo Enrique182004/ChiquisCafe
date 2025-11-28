@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart - Café de Olla</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/cart.css">
+    <script>
+        // Redirect to zip check if user hasn't entered zip code yet
+        if (!localStorage.getItem('userZipCode')) {
+            window.location.href = '../index.html';
+        }
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -12,17 +19,17 @@
         <nav class="navbar">
             <div class="container">
                 <div class="logo">
-                    <img src="images/logo.png" alt="Café de Olla">
+                    <img src="../images/logo.png" alt="Café de Olla">
                     <h1>Chiquis Cafe de Olla</h1>
                 </div>
                 <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
                     ☰
                 </button>
                 <ul class="nav-menu" id="navMenu">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home.html">Home</a></li>
                     <li><a href="menu.html">Menu</a></li>
-                    <li><a href="index.html#about">About</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="home.html#about">About</a></li>
+                    <li><a href="home.html#contact">Contact</a></li>
                     <li>
                         <a href="cart.html" class="cart-link">
                             🛒 Cart (<span id="cart-count">0</span>)
@@ -145,24 +152,8 @@
         </div>
     </footer>
 
-    <script src="js/menu.js"></script>
-    <script src="js/cart.js"></script>
-    <script>
-        // Mobile menu toggle
-        function toggleMenu() {
-            const navMenu = document.getElementById('navMenu');
-            navMenu.classList.toggle('active');
-        }
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const navMenu = document.getElementById('navMenu');
-            const menuToggle = document.querySelector('.menu-toggle');
-            
-            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
-                navMenu.classList.remove('active');
-            }
-        });
-    </script>
+    <script src="../js/main.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/cart.js"></script>
 </body>
 </html>

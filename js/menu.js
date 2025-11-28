@@ -5,7 +5,7 @@ const products = [
         name: "Coffee Bag 16 oz. / 40 servings",
         description: "Grandma Traditional Blend - Medium Roast, Sweet & Spicy",
         price: 34.99,
-        image: "images/coffee-bag-16oz.png",
+        image: "../images/coffee-bag-16oz.png",
         category: "coffee"
     },
     {
@@ -13,7 +13,7 @@ const products = [
         name: "Coffee Aluminum Can 8 oz. / 20 servings",
         description: "Grandma Traditional Blend - Medium Roast, Sweet & Spicy",
         price: 17.99,
-        image: "images/coffee-can-8oz.png",
+        image: "../images/coffee-can-8oz.png",
         category: "coffee"
     }
 ];
