@@ -53,6 +53,7 @@
             <div class="container">
                 <div class="logo">
                     <img src="images/logo.png" alt="Café de Olla">
+                    <h1>Chiquis Cafe de Olla</h1>
                 </div>
                 <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
                     ☰

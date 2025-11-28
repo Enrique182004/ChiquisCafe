@@ -67,13 +67,20 @@ a, button, input, select {
     position: relative;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .logo h1 {
     color: var(--primary-color);
     font-size: 1.5rem;
+    margin: 0;
 }
 
 .logo img {
-    height: 70px;
+    height: 90px;
     width: auto;
 }
 
@@ -660,7 +667,11 @@ footer {
 @media (max-width: 768px) {
     /* Logo */
     .logo img {
-        height: 50px;
+        height: 60px;
+    }
+    
+    .logo h1 {
+        font-size: 1.1rem;
     }
     
     /* Hero */
