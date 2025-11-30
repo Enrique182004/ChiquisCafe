@@ -129,9 +129,25 @@
         <!-- Cart Summary -->
         <div class="cart-summary" id="cart-summary" style="display: none;">
             <h3>Order Summary</h3>
+            
+            <!-- Subscription Option -->
+            <div id="subscription-option" style="background: #FFF5F9; padding: 1rem; border-radius: 10px; margin-bottom: 1rem; border: 2px solid #F9E5EE; display: none;">
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="checkbox" id="subscribe-checkbox" style="width: 20px; height: 20px; margin-right: 0.5rem; cursor: pointer;">
+                    <div>
+                        <strong style="color: #B8457D;">💎 Subscribe & Save 25%!</strong>
+                        <p style="font-size: 0.9rem; color: #666; margin: 0.25rem 0 0 0;">Get this order every month for 6 months with 25% discount (Shipping NOT included)</p>
+                    </div>
+                </label>
+            </div>
+            
             <div class="summary-row">
                 <span>Subtotal:</span>
                 <span id="subtotal">$0.00</span>
+            </div>
+            <div class="summary-row" id="discount-row" style="display: none; color: #28a745;">
+                <span>Subscription Discount (25%):</span>
+                <span id="discount">-$0.00</span>
             </div>
             <div class="summary-row total">
                 <span>Total:</span>

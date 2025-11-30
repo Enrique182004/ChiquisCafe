@@ -4,6 +4,7 @@ function displayCart() {
     const cartContent = document.getElementById('cart-content');
     const cartSummary = document.getElementById('cart-summary');
     const fulfillmentSection = document.getElementById('fulfillment-section');
+    const subscriptionOption = document.getElementById('subscription-option');
     
     if (cart.length === 0) {
         cartContent.innerHTML = `
@@ -41,10 +42,18 @@ function displayCart() {
         </div>
     `;
     
+    // Check if cart has eligible items for subscription (regular coffee products only)
+    const hasEligibleItems = cart.some(item => item.category === 'coffee');
+    
+    // Show/hide subscription option
+    if (hasEligibleItems && subscriptionOption) {
+        subscriptionOption.style.display = 'block';
+    } else if (subscriptionOption) {
+        subscriptionOption.style.display = 'none';
+    }
+    
     // Update summary
-    const total = getCartTotal();
-    document.getElementById('subtotal').textContent = `$${total.toFixed(2)}`;
-    document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+    updateCartSummary();
     
     cartSummary.style.display = 'block';
     fulfillmentSection.style.display = 'block';
@@ -53,9 +62,37 @@ function displayCart() {
     checkDeliveryArea();
 }
 
-// Handle fulfillment type changes
+// Update cart summary with subscription discount
+function updateCartSummary() {
+    const cart = getCart();
+    const subscribeCheckbox = document.getElementById('subscribe-checkbox');
+    const isSubscription = subscribeCheckbox && subscribeCheckbox.checked;
+    
+    const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    const discount = isSubscription ? subtotal * 0.25 : 0;
+    const total = subtotal - discount;
+    
+    document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+    document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+    
+    // Show/hide discount row
+    const discountRow = document.getElementById('discount-row');
+    if (isSubscription && discountRow) {
+        discountRow.style.display = 'flex';
+        document.getElementById('discount').textContent = `-$${discount.toFixed(2)}`;
+    } else if (discountRow) {
+        discountRow.style.display = 'none';
+    }
+}
+
+// Add event listener for subscription checkbox
 document.addEventListener('DOMContentLoaded', function() {
     displayCart();
+    
+    const subscribeCheckbox = document.getElementById('subscribe-checkbox');
+    if (subscribeCheckbox) {
+        subscribeCheckbox.addEventListener('change', updateCartSummary);
+    }
     
     const fulfillmentRadios = document.querySelectorAll('input[name="fulfillment"]');
     const addressForm = document.getElementById('address-form');
@@ -97,6 +134,10 @@ async function proceedToCheckout(event) {
     // Get fulfillment type
     const fulfillmentType = document.querySelector('input[name="fulfillment"]:checked').value;
     
+    // Get subscription option
+    const subscribeCheckbox = document.getElementById('subscribe-checkbox');
+    const isSubscription = subscribeCheckbox && subscribeCheckbox.checked;
+    
     // Validate address if needed
     if (fulfillmentType !== 'PICKUP') {
         const fullName = document.getElementById('fullName').value;
@@ -118,11 +159,23 @@ async function proceedToCheckout(event) {
         ? document.getElementById('location').value 
         : 'LZ8GQYSRJ8QRV'; // Default to Cafe de Olla main location
     
+    // Apply subscription discount if checked
+    let finalCart = cart;
+    if (isSubscription) {
+        finalCart = cart.map(item => ({
+            ...item,
+            price: item.price * 0.75, // Apply 25% discount
+            isSubscription: true,
+            subscriptionMonths: 6
+        }));
+    }
+    
     // Prepare order data
     const orderData = {
-        cart: cart,
+        cart: finalCart,
         fulfillmentType: fulfillmentType,
         locationId: locationId,
+        isSubscription: isSubscription,
         customerInfo: fulfillmentType !== 'PICKUP' ? {
             fullName: document.getElementById('fullName').value,
             phone: document.getElementById('phone').value,

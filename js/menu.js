@@ -15,6 +15,31 @@ const products = [
         price: 17.99,
         image: "../images/coffee-can-8oz.png",
         category: "coffee"
+    },
+    {
+        id: 3,
+        name: "6-Month Subscription - Coffee Bag 16 oz.",
+        description: "Get 6 bags delivered monthly with 25% OFF! (Shipping NOT included)",
+        price: 157.46,
+        image: "../images/coffee-bag-16oz.png",
+        category: "subscription"
+    },
+    {
+        id: 4,
+        name: "6-Month Subscription - Coffee Can 8 oz.",
+        description: "Get 6 cans delivered monthly with 25% OFF! (Shipping NOT included)",
+        price: 80.96,
+        image: "../images/coffee-can-8oz.png",
+        category: "subscription"
+    },
+    {
+        id: 5,
+        name: "Ingredients & Preparation Guide",
+        description: "Learn about our premium ingredients and brewing instructions",
+        price: 0,
+        image: "../images/ingredients.png",
+        category: "info",
+        isInfo: true
     }
 ];
 
@@ -23,7 +48,18 @@ function loadProducts(containerId, featured = false) {
     const container = document.getElementById(containerId);
     if (!container) return;
     
-    const productsToShow = featured ? products.slice(0, 4) : products;
+    let productsToShow;
+    if (featured) {
+        // For homepage: show 2 regular coffee products + ingredients image (3 total)
+        productsToShow = [
+            products.find(p => p.id === 1), // Coffee Bag
+            products.find(p => p.id === 2), // Coffee Can
+            products.find(p => p.id === 5)  // Ingredients
+        ].filter(Boolean);
+    } else {
+        // For menu page: show only regular products (no subscriptions, no ingredients)
+        productsToShow = products.filter(p => p.category === 'coffee');
+    }
     
     if (featured) {
         // Featured: Just show clickable images
@@ -63,7 +99,7 @@ function saveCart(cart) {
 
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
-    if (!product) return;
+    if (!product || product.isInfo) return;
     
     const cart = getCart();
     const existingItem = cart.find(item => item.id === productId);
