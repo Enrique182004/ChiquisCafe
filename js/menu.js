@@ -69,16 +69,21 @@ function loadProducts(containerId, featured = false) {
             </a>
         `).join('');
     } else {
-        // Menu: Show full product cards
+        // Menu: Show full product cards with link to detail page
         container.innerHTML = productsToShow.map(product => `
             <div class="product-card">
-                <img src="${product.image}" alt="${product.name}" class="product-image">
+                <a href="product-detail.html?id=${product.id}">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                </a>
                 <div class="product-info">
                     <h3>${product.name}</h3>
                     <p>${product.description}</p>
                     <div class="product-price">$${product.price.toFixed(2)}</div>
-                    <button class="btn btn-primary" onclick="addToCart(${product.id})">
-                        Add to Cart
+                    <a href="product-detail.html?id=${product.id}" class="btn btn-primary">
+                        View Details
+                    </a>
+                    <button class="btn btn-secondary" onclick="addToCart(${product.id})" style="margin-top: 0.5rem;">
+                        Quick Add to Cart
                     </button>
                 </div>
             </div>

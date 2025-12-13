@@ -1,0 +1,319 @@
+/* Product Detail Page Styles */
+
+.product-detail-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.product-image-section {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+.product-image-section img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.product-info-section {
+    padding: 1rem 0;
+}
+
+.product-info-section h1 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.product-price-large {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.product-description {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.product-description h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.product-description p {
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+/* Subscription Section */
+.subscription-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.subscription-section h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.subscription-option {
+    background: var(--white);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s;
+}
+
+.subscription-option.highlighted {
+    background: var(--light-pink);
+    border-color: var(--accent-pink);
+}
+
+.subscription-option label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+}
+
+.subscription-option input[type="radio"] {
+    margin-right: 0.75rem;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.subscription-option strong {
+    color: var(--primary-color);
+}
+
+.subscription-frequency {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    background: var(--white);
+}
+
+.subscription-frequency:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.subscription-note {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+}
+
+/* Fulfillment Section */
+.fulfillment-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.fulfillment-section h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.required {
+    color: #d32f2f;
+    font-size: 0.9rem;
+    font-weight: normal;
+}
+
+.fulfillment-options-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.fulfillment-btn {
+    background: var(--white);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.fulfillment-btn span:first-child {
+    font-size: 1.5rem;
+}
+
+.fulfillment-btn:hover {
+    border-color: var(--accent-pink);
+    background: var(--light-pink);
+}
+
+.fulfillment-btn.active {
+    background: var(--light-pink);
+    border-color: var(--primary-color);
+    border-width: 3px;
+}
+
+.check-address-link {
+    color: var(--primary-color);
+    text-decoration: underline;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.address-note {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* Quantity Section */
+.quantity-section {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.quantity-controls-inline {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.25rem;
+}
+
+.quantity-controls-inline button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: var(--light-pink);
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.quantity-controls-inline button:hover {
+    background: var(--accent-pink);
+    color: var(--white);
+}
+
+.quantity-controls-inline input {
+    width: 60px;
+    text-align: center;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* Add to Cart Button */
+.btn-large {
+    width: 100%;
+    padding: 1.25rem 2rem;
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+}
+
+/* Collapsible Sections */
+.collapsible-section {
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.collapsible-header {
+    width: 100%;
+    background: var(--light-color);
+    border: none;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.collapsible-header:hover {
+    background: var(--light-pink);
+}
+
+.collapsible-header .arrow {
+    transition: transform 0.3s;
+}
+
+.collapsible-header.active .arrow {
+    transform: rotate(180deg);
+}
+
+.collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 1.5rem;
+}
+
+.collapsible-content.active {
+    max-height: 500px;
+    padding: 1rem 1.5rem;
+}
+
+.collapsible-content p {
+    margin-bottom: 0.75rem;
+    color: var(--text-light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .product-detail-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1rem;
+    }
+
+    .product-image-section {
+        position: relative;
+        top: 0;
+    }
+
+    .product-info-section h1 {
+        font-size: 1.5rem;
+    }
+
+    .product-price-large {
+        font-size: 2rem;
+    }
+
+    .fulfillment-options-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-large {
+        font-size: 1.1rem;
+        padding: 1rem;
+    }
+}

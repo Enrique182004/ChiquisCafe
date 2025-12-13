@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Café de Olla</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/product-detail.css">
+    <script>
+        // Redirect to zip check if user hasn't entered zip code yet
+        if (!localStorage.getItem('userZipCode')) {
+            window.location.href = '../index.html';
+        }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <img src="../images/logo.png" alt="Café de Olla">
+                    <h1>Chiquis Cafe de Olla</h1>
+                </div>
+                <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+                    ☰
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="home.html#about">About</a></li>
+                    <li><a href="home.html#contact">Contact</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-link">
+                            🛒 Cart (<span id="cart-count">0</span>)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="product-detail-container">
+            <!-- Product Image -->
+            <div class="product-image-section">
+                <img id="product-image" src="../images/coffee-bag-16oz.png" alt="Product">
+            </div>
+
+            <!-- Product Info -->
+            <div class="product-info-section">
+                <h1 id="product-name">Chiquis Café de Olla</h1>
+                <div class="product-price-large" id="product-price">$34.99</div>
+                
+                <!-- Description -->
+                <div class="product-description">
+                    <h3>Description</h3>
+                    <p id="product-desc">Experience the rich heritage and authentic flavors with Chiquis Premium Cafe de Olla, featuring Grandma's original blend. Savor every sip of this meticulously crafted coffee that brings a taste of tradition to your cup.</p>
+                    <p id="product-details"><strong>Coffee Bag 16 oz. / 40 servings</strong><br>
+                    Coffee Aluminum Can 8 oz. / 20 servings</p>
+                </div>
+
+                <!-- Subscription Option -->
+                <div class="subscription-section">
+                    <h3>Subscription</h3>
+                    <div class="subscription-option">
+                        <label>
+                            <input type="radio" name="purchase-type" value="onetime" checked>
+                            <span>One-time purchase</span>
+                        </label>
+                    </div>
+                    <div class="subscription-option highlighted">
+                        <label>
+                            <input type="radio" name="purchase-type" value="subscription" id="subscription-radio">
+                            <span>
+                                <strong>8% OFF*</strong><br>
+                                Subscribe and save
+                            </span>
+                        </label>
+                        <select id="subscription-frequency" class="subscription-frequency" disabled>
+                            <option value="2weeks">Every 2 weeks</option>
+                            <option value="1month">Every month</option>
+                            <option value="2months">Every 2 months</option>
+                        </select>
+                        <p class="subscription-note">Cancel at any time<br>*Discount applied at checkout</p>
+                    </div>
+                </div>
+
+                <!-- How to Get It -->
+                <div class="fulfillment-section">
+                    <h3>How to get it <span class="required">Required</span></h3>
+                    <div class="fulfillment-options-grid">
+                        <button class="fulfillment-btn" data-type="shipping">
+                            <span>📦</span>
+                            <span>Shipping</span>
+                        </button>
+                        <button class="fulfillment-btn active" data-type="delivery">
+                            <span>🚚</span>
+                            <span>Local delivery</span>
+                        </button>
+                        <button class="fulfillment-btn" data-type="pickup">
+                            <span>🏪</span>
+                            <span>Store pickup</span>
+                        </button>
+                    </div>
+                    <a href="#" class="check-address-link">Check your address</a>
+                    <p class="address-note">Enter delivery address to add to cart</p>
+                </div>
+
+                <!-- Quantity Selector -->
+                <div class="quantity-section">
+                    <label>Quantity:</label>
+                    <div class="quantity-controls-inline">
+                        <button onclick="decreaseQuantity()">−</button>
+                        <input type="number" id="quantity" value="1" min="1" max="99">
+                        <button onclick="increaseQuantity()">+</button>
+                    </div>
+                </div>
+
+                <!-- Add to Cart Button -->
+                <button class="btn btn-primary btn-large" onclick="addProductToCart()">
+                    Add to Cart - <span id="total-price">$34.99</span>
+                </button>
+
+                <!-- Shipping & Returns -->
+                <div class="collapsible-section">
+                    <button class="collapsible-header" onclick="toggleSection(this)">
+                        <span>Shipping & Returns</span>
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <p><strong>Shipping:</strong> Free shipping on orders over $50</p>
+                        <p><strong>Local Delivery:</strong> Available in El Paso area (799xx zip codes)</p>
+                        <p><strong>Store Pickup:</strong> Available at our two locations</p>
+                        <p><strong>Returns:</strong> 30-day satisfaction guarantee</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Café de Olla by Chiquis. All rights reserved.</p>
+            <p>Email: [email protected]</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/product-detail.js"></script>
+</body>
+</html>
