@@ -58,22 +58,28 @@ if (USE_SANDBOX) {
 // STEP 4: YOUR WEBSITE URL
 // ==========================================
 // Update this to your actual domain (use https:// when SSL is enabled)
-define('WEBSITE_URL', 'https://chiquiscuisine.com');
-
+if (USE_SANDBOX) {
+    define('WEBSITE_URL', 'http://localhost/chiquis-website');
+} else {
+    define('WEBSITE_URL', 'https://chiquiscuisine.com');
+}
 // ==========================================
 // STEP 5: YOUR SQUARE LOCATION IDs
 // ==========================================
 // Get these from: https://squareup.com/dashboard/locations
 // Click on each location to see its ID
 
-// Main cafe location
-define('LOCATION_MAIN', 'L5QHW4E621DZC');
-
-// Cafe de Olla - Main pickup location
-define('LOCATION_CAFE', 'LZ8GQYSRJ8QRV');
-
-// Airport pickup location
-define('LOCATION_AIRPORT', 'L6CGBKNZBHZX8');
+if (USE_SANDBOX) {
+    // Sandbox Location ID
+    define('LOCATION_MAIN', 'LF294RNFKGH3D');
+    define('LOCATION_CAFE', 'LF294RNFKGH3D');
+    define('LOCATION_AIRPORT', 'LF294RNFKGH3D');
+} else {
+    // Production Location IDs
+    define('LOCATION_MAIN', 'L5QHW4E621DZC');
+    define('LOCATION_CAFE', 'LZ8GQYSRJ8QRV');
+    define('LOCATION_AIRPORT', 'L6CGBKNZBHZX8');
+}
 
 /**
  * HOW TO GET YOUR LOCATION IDs:
@@ -92,7 +98,7 @@ define('LOCATION_AIRPORT', 'L6CGBKNZBHZX8');
  * ✅ USE_SANDBOX is set to true
  * ✅ SANDBOX_ACCESS_TOKEN is filled in
  * ✅ SANDBOX_APPLICATION_ID is filled in
- * ✅ Location IDs are correct
+ * ✅ Sandbox Location ID is filled in (LF294RNFKGH3D)
  * ✅ WEBSITE_URL matches your domain
  * 
  * Test with Square test card:

@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
@@ -17,7 +20,7 @@ if (!$data) {
 
 $cart = $data['cart'] ?? [];
 $fulfillmentType = $data['fulfillmentType'] ?? 'PICKUP';
-$locationId = $data['locationId'] ?? LOCATION_MAIN;
+$locationId = 'LF294RNFKGH3D';
 $customerInfo = $data['customerInfo'] ?? null;
 
 if (empty($cart)) {
@@ -33,7 +36,6 @@ foreach ($cart as $item) {
     $itemTotalCents = (int)($item['price'] * $item['quantity'] * 100);
     $totalCents += $itemTotalCents;
     
-    // Create line item for order
     $lineItems[] = [
         'name' => $item['name'],
         'quantity' => (string)$item['quantity'],
@@ -44,7 +46,7 @@ foreach ($cart as $item) {
     ];
 }
 
-// Create idempotency key (unique identifier)
+// Create idempotency key
 $idempotencyKey = uniqid('order_', true);
 
 // Build order request
@@ -57,9 +59,7 @@ $orderRequest = [
 ];
 
 // Add fulfillment details
-$fulfillment = [
-    'type' => $fulfillmentType
-];
+$fulfillment = ['type' => $fulfillmentType];
 
 if ($fulfillmentType === 'PICKUP') {
     $fulfillment['pickup_details'] = [
@@ -107,16 +107,22 @@ if (!$orderResponse || !isset($orderResponse['order'])) {
 
 $orderId = $orderResponse['order']['id'];
 
-// Create payment link for the order
+// Create payment link
 $paymentLinkRequest = [
     'idempotency_key' => uniqid('link_', true),
-    'order_id' => $orderId,
+    'quick_pay' => [
+        'name' => 'Café de Olla - Order #' . substr($orderId, 0, 8),
+        'price_money' => [
+            'amount' => $totalCents,
+            'currency' => 'USD'
+        ],
+        'location_id' => $locationId
+    ],
     'checkout_options' => [
-        'redirect_url' => WEBSITE_URL . '/thank-you.php?order_id=' . $orderId
+        'redirect_url' => WEBSITE_URL . '/pages/thank-you.php?order_id=' . $orderId
     ]
 ];
 
-// Add pre-populated customer data if available
 if ($customerInfo) {
     $paymentLinkRequest['pre_populated_data'] = [
         'buyer_email' => $customerInfo['email'] ?? '',
@@ -139,14 +145,12 @@ if (!$paymentLinkResponse || !isset($paymentLinkResponse['payment_link'])) {
     exit;
 }
 
-// Return success with payment URL
 echo json_encode([
     'success' => true,
     'orderId' => $orderId,
     'paymentUrl' => $paymentLinkResponse['payment_link']['url']
 ]);
 
-// Helper function to make Square API requests
 function makeSquareRequest($endpoint, $method = 'GET', $data = null) {
     $url = SQUARE_API_URL . $endpoint;
     
@@ -171,7 +175,6 @@ function makeSquareRequest($endpoint, $method = 'GET', $data = null) {
     
     $result = json_decode($response, true);
     
-    // Log errors for debugging
     if ($httpCode >= 400) {
         error_log("Square API Error ($httpCode): " . print_r($result, true));
     }
