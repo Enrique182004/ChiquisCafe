@@ -63,8 +63,10 @@
     <script src="../js/main.js"></script>
     <script src="../js/menu.js"></script>
     <script>
-        // Load all products
-        loadProducts('menu-products', false);
+        // Ensure products load on menu page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts('menu-products', false);
+        });
     </script>
 </body>
 </html>
