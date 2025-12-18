@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery & Reviews - Chiquis Café de Olla</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/gallery.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="home.html" class="logo">
+                    <img src="../images/logo.png" alt="Café de Olla">
+                    <h1>Cafe de Olla</h1>
+                </a>
+                <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+                    ☰
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                    <li><a href="home.html#about">About</a></li>
+                    <li><a href="home.html#contact">Contact</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-link">
+                            🛒 Cart (<span id="cart-count">0</span>)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Gallery Hero -->
+        <section class="gallery-hero">
+            <div class="container">
+                <h1>📸 Our Gallery</h1>
+                <p>Discover our premium coffee, delicious pastries, and the love we put into every product</p>
+            </div>
+        </section>
+
+        <!-- Gallery Grid -->
+        <section class="gallery-section">
+            <div class="container">
+                <h2>Our Products & Displays</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="../images/gallery/coffee-products.jpeg" alt="Chiquis Café de Olla Coffee Products">
+                        <div class="gallery-overlay">
+                            <p>Premium Coffee Blends</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/gallery/coffee-banner.jpeg" alt="Freshly Made With Love">
+                        <div class="gallery-overlay">
+                            <p>Freshly Made Daily</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/gallery/product-display.jpeg" alt="Product Display">
+                        <div class="gallery-overlay">
+                            <p>Quality Products</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/gallery/coffee-pricing.jpeg" alt="Coffee Packages">
+                        <div class="gallery-overlay">
+                            <p>Choose Your Blend</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/gallery/bakery-display.jpeg" alt="Chiquis Bakery Display">
+                        <div class="gallery-overlay">
+                            <p>Fresh Baked Goods</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/gallery/coffee-stand.jpeg" alt="Airport Coffee Stand">
+                        <div class="gallery-overlay">
+                            <p>Airport Location</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/gallery/coffee-tin.jpeg" alt="Coffee in Tin Container">
+                        <div class="gallery-overlay">
+                            <p>Perfect for Gifting</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Full Reviews Section -->
+        <section class="reviews-full">
+            <div class="container">
+                <h2>⭐ Customer Reviews</h2>
+                <p class="section-subtitle">See what our customers are saying about our authentic Café de Olla</p>
+                <div class="reviews-grid">
+                    <div class="review-card">
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"The best Café de Olla I've ever tasted! It reminds me of my grandmother's recipe. The spices are perfectly balanced and the quality is outstanding."</p>
+                        <p class="review-author">— María G.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"I order the 16oz bag every month! The coffee is always fresh, and the flavor is authentic. Their pastries are amazing too!"</p>
+                        <p class="review-author">— Carlos R.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"Love supporting a local business with such high-quality products. The aluminum can is perfect for gifting. Everyone I share it with becomes a fan!"</p>
+                        <p class="review-author">— Jessica M.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"Traditional flavor with a modern twist. The convenience of ordering online and picking up at the airport location is perfect for my busy schedule."</p>
+                        <p class="review-author">— David L.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"Absolutely delicious! The cinnamon and piloncillo give it such an authentic taste. This is real Mexican coffee, not the watered-down version you find elsewhere."</p>
+                        <p class="review-author">— Roberto S.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"I gave the subscription as a gift to my mom and she calls me every month thanking me! She says it's the best coffee she's ever had. Thank you Chiquis!"</p>
+                        <p class="review-author">— Ana P.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"The packaging is beautiful and the coffee inside is even better. I bought several cans to ship to family in other states. Everyone loves it!"</p>
+                        <p class="review-author">— Miguel T.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"As a coffee connoisseur, I can say this is the real deal. The medium roast is perfect and you can taste the quality in every cup. Highly recommended!"</p>
+                        <p class="review-author">— Sarah K.</p>
+                    </div>
+                </div>
+                <div class="review-cta">
+                    <a href="menu.html" class="btn btn-primary">Order Now</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-media-links">
+                <a href="https://www.tiktok.com/@chiquisbakery?_r=1&_t=ZP-91ooqM0zHxv" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="#ffffff"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/chiquisbakery.elp?igsh=eG5rMG5laDN4N2ds&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="https://www.facebook.com/share/1FZLDC6sJA/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="#ffffff"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+            </div>
+            <p>&copy; 2025 Café de Olla by Chiquis. All rights reserved.</p>
+            <p>Email: [email protected]</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

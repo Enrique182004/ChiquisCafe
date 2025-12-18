@@ -78,20 +78,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Fulfillment buttons
-    const fulfillmentBtns = document.querySelectorAll('.fulfillment-btn');
-    fulfillmentBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            fulfillmentBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
-    
     // Quantity input change
     document.getElementById('quantity').addEventListener('input', updateTotalPrice);
 });
 
-// Add product to cart
+// Add product to cart - simplified (no fulfillment type needed here)
 function addProductToCart() {
     const productId = getProductIdFromURL();
     const product = products.find(p => p.id === productId);
@@ -99,7 +90,6 @@ function addProductToCart() {
     
     const quantity = parseInt(document.getElementById('quantity').value);
     const isSubscription = document.querySelector('input[name="purchase-type"]:checked').value === 'subscription';
-    const fulfillmentType = document.querySelector('.fulfillment-btn.active').dataset.type;
     
     const cart = getCart();
     const existingItem = cart.find(item => item.id === productId);
@@ -110,8 +100,8 @@ function addProductToCart() {
         cart.push({
             ...product,
             quantity: quantity,
-            isSubscription: isSubscription,
-            fulfillmentType: fulfillmentType
+            isSubscription: isSubscription
+            // Fulfillment type will be selected in the cart
         });
     }
     

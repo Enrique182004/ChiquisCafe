@@ -74,6 +74,13 @@ a, button, input, select {
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.3s;
+}
+
+.logo:hover {
+    opacity: 0.8;
 }
 
 .logo h1 {

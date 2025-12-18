@@ -1,99 +1,173 @@
-// Display cart items
+// Display cart items with improved design - creates all elements from scratch
 function displayCart() {
     const cart = getCart();
     const cartContent = document.getElementById('cart-content');
-    const cartSummary = document.getElementById('cart-summary');
-    const fulfillmentSection = document.getElementById('fulfillment-section');
-    const subscriptionOption = document.getElementById('subscription-option');
     
     if (cart.length === 0) {
         cartContent.innerHTML = `
             <div class="empty-cart">
                 <h2>Your cart is empty</h2>
-                <p>Add some delicious items to get started!</p>
+                <p>Add some delicious Café de Olla to your cart!</p>
                 <a href="menu.html" class="btn btn-primary">Browse Menu</a>
             </div>
         `;
-        cartSummary.style.display = 'none';
-        fulfillmentSection.style.display = 'none';
         return;
     }
     
-    // Show cart items
+    // Check if cart has eligible items for subscription
+    const hasEligibleItems = cart.some(item => item.category === 'coffee');
+    
+    // Create complete cart layout with all sections
     cartContent.innerHTML = `
-        <div class="cart-items">
-            ${cart.map(item => `
-                <div class="cart-item">
-                    <div class="item-details">
-                        <h3>${item.name}</h3>
-                        <p>$${item.price.toFixed(2)} each</p>
-                    </div>
-                    <div class="quantity-controls">
-                        <button onclick="updateQuantity(${item.id}, -1)">-</button>
-                        <span>${item.quantity}</span>
-                        <button onclick="updateQuantity(${item.id}, 1)">+</button>
-                    </div>
-                    <div class="item-total">
-                        <strong>$${(item.price * item.quantity).toFixed(2)}</strong>
-                    </div>
-                    <button class="btn btn-secondary" onclick="removeFromCart(${item.id})">Remove</button>
+        <div class="cart-content-wrapper">
+            <div class="cart-left-column">
+                <!-- Cart Items -->
+                <div class="cart-items">
+                    ${cart.map(item => `
+                        <div class="cart-item">
+                            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                            
+                            <div class="item-details-wrapper">
+                                <div class="item-details">
+                                    <h3>${item.name}</h3>
+                                    <p class="item-price">$${item.price.toFixed(2)} each</p>
+                                </div>
+                                
+                                <div class="item-controls">
+                                    <div class="quantity-controls">
+                                        <button onclick="updateQuantity(${item.id}, -1)" aria-label="Decrease quantity">−</button>
+                                        <span>${item.quantity}</span>
+                                        <button onclick="updateQuantity(${item.id}, 1)" aria-label="Increase quantity">+</button>
+                                    </div>
+                                    <div class="item-total">$${(item.price * item.quantity).toFixed(2)}</div>
+                                    <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
                 </div>
-            `).join('')}
+                
+                <!-- Fulfillment Options -->
+                <div class="fulfillment-options">
+                    <h3>How would you like to receive your order?</h3>
+                    <form id="fulfillment-form">
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="fulfillment" value="PICKUP" checked>
+                                <span>🚗 Pickup - I'll pick it up at your location</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="fulfillment" value="DELIVERY">
+                                <span>🚚 Local Delivery - Deliver to my address (El Paso area)</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="fulfillment" value="SHIPMENT">
+                                <span>📦 Shipping - Ship to my address</span>
+                            </label>
+                        </div>
+
+                        <!-- Location Selection for Pickup -->
+                        <div class="form-group" id="pickup-location">
+                            <label for="location">Pickup Location:</label>
+                            <select id="location" name="location">
+                                <option value="L6CGBKNZBHZX8">Cafe de Olla - Airport Pickup - 6701 Convair Rd</option>
+                            </select>
+                        </div>
+
+                        <!-- Shipping/Delivery Form -->
+                        <div class="shipping-form" id="address-form">
+                            <div class="address-form-header">
+                                <h4>📍 Where should we send your coffee?</h4>
+                                <p class="form-subtitle">We'll deliver your delicious Café de Olla right to your door!</p>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fullName">👤 Full Name</label>
+                                    <input type="text" id="fullName" name="fullName" placeholder="John Doe">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone">📞 Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="(915) 555-1234">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">📧 Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="[email protected]">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">🏠 Street Address</label>
+                                <input type="text" id="address" name="address" placeholder="123 Main Street, Apt 4B">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">🌆 City</label>
+                                    <input type="text" id="city" name="city" placeholder="El Paso">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="state">📍 State</label>
+                                    <input type="text" id="state" name="state" value="TX" placeholder="TX">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="zipCode">📮 Zip Code</label>
+                                    <input type="text" id="zipCode" name="zipCode" placeholder="79901">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Cart Summary Sidebar -->
+            <div class="cart-summary">
+                <h3>Order Summary</h3>
+                
+                <!-- Subscription Option -->
+                ${hasEligibleItems ? `
+                <div id="subscription-option">
+                    <label>
+                        <input type="checkbox" id="subscribe-checkbox">
+                        <div>
+                            <strong>💎 Subscribe & Save 25%!</strong>
+                            <p>Get this order every month for 6 months with 25% discount (Shipping NOT included)</p>
+                        </div>
+                    </label>
+                </div>
+                ` : ''}
+                
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">$0.00</span>
+                </div>
+                <div class="summary-row" id="discount-row" style="display: none;">
+                    <span>Subscription Discount (25%):</span>
+                    <span id="discount">-$0.00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span id="total">$0.00</span>
+                </div>
+                <button class="btn btn-primary" onclick="proceedToCheckout(event)">
+                    Proceed to Checkout
+                </button>
+            </div>
         </div>
     `;
     
-    // Check if cart has eligible items for subscription (regular coffee products only)
-    const hasEligibleItems = cart.some(item => item.category === 'coffee');
-    
-    // Show/hide subscription option
-    if (hasEligibleItems && subscriptionOption) {
-        subscriptionOption.style.display = 'block';
-    } else if (subscriptionOption) {
-        subscriptionOption.style.display = 'none';
-    }
-    
-    // Update summary
+    // Now setup event listeners
+    setupFulfillmentToggles();
+    setupSubscriptionToggle();
     updateCartSummary();
-    
-    cartSummary.style.display = 'block';
-    fulfillmentSection.style.display = 'block';
-    
-    // Check delivery area and update options
     checkDeliveryArea();
 }
 
-// Update cart summary with subscription discount
-function updateCartSummary() {
-    const cart = getCart();
-    const subscribeCheckbox = document.getElementById('subscribe-checkbox');
-    const isSubscription = subscribeCheckbox && subscribeCheckbox.checked;
-    
-    const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-    const discount = isSubscription ? subtotal * 0.25 : 0;
-    const total = subtotal - discount;
-    
-    document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
-    document.getElementById('total').textContent = `$${total.toFixed(2)}`;
-    
-    // Show/hide discount row
-    const discountRow = document.getElementById('discount-row');
-    if (isSubscription && discountRow) {
-        discountRow.style.display = 'flex';
-        document.getElementById('discount').textContent = `-$${discount.toFixed(2)}`;
-    } else if (discountRow) {
-        discountRow.style.display = 'none';
-    }
-}
-
-// Add event listener for subscription checkbox
-document.addEventListener('DOMContentLoaded', function() {
-    displayCart();
-    
-    const subscribeCheckbox = document.getElementById('subscribe-checkbox');
-    if (subscribeCheckbox) {
-        subscribeCheckbox.addEventListener('change', updateCartSummary);
-    }
-    
+function setupFulfillmentToggles() {
     const fulfillmentRadios = document.querySelectorAll('input[name="fulfillment"]');
     const addressForm = document.getElementById('address-form');
     const pickupLocation = document.getElementById('pickup-location');
@@ -119,7 +193,37 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-});
+}
+
+function setupSubscriptionToggle() {
+    const subscribeCheckbox = document.getElementById('subscribe-checkbox');
+    if (subscribeCheckbox) {
+        subscribeCheckbox.addEventListener('change', updateCartSummary);
+    }
+}
+
+// Update cart summary with subscription discount
+function updateCartSummary() {
+    const cart = getCart();
+    const subscribeCheckbox = document.getElementById('subscribe-checkbox');
+    const isSubscription = subscribeCheckbox && subscribeCheckbox.checked;
+    
+    const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    const discount = isSubscription ? subtotal * 0.25 : 0;
+    const total = subtotal - discount;
+    
+    document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+    document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+    
+    // Show/hide discount row
+    const discountRow = document.getElementById('discount-row');
+    if (isSubscription && discountRow) {
+        discountRow.style.display = 'flex';
+        document.getElementById('discount').textContent = `-$${discount.toFixed(2)}`;
+    } else if (discountRow) {
+        discountRow.style.display = 'none';
+    }
+}
 
 // Proceed to checkout
 async function proceedToCheckout(event) {
@@ -258,7 +362,6 @@ function showToast(message) {
 // Check delivery area based on zip code
 function checkDeliveryArea() {
     const deliveryArea = localStorage.getItem('deliveryArea');
-    const userZipCode = localStorage.getItem('userZipCode');
     
     const pickupOption = document.querySelector('input[value="PICKUP"]');
     const deliveryOption = document.querySelector('input[value="DELIVERY"]');
@@ -295,3 +398,8 @@ function checkDeliveryArea() {
         }
     }
 }
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    displayCart();
+});
