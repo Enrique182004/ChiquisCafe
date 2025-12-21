@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('quantity').addEventListener('input', updateTotalPrice);
 });
 
-// Add product to cart - simplified (no fulfillment type needed here)
+// Add product to cart with subscription data
 function addProductToCart() {
     const productId = getProductIdFromURL();
     const product = products.find(p => p.id === productId);
@@ -90,17 +90,24 @@ function addProductToCart() {
     
     const quantity = parseInt(document.getElementById('quantity').value);
     const isSubscription = document.querySelector('input[name="purchase-type"]:checked').value === 'subscription';
+    const subscriptionFrequency = isSubscription ? document.getElementById('subscription-frequency').value : null;
     
     const cart = getCart();
     const existingItem = cart.find(item => item.id === productId);
     
     if (existingItem) {
         existingItem.quantity += quantity;
+        // Update subscription info if changed
+        if (isSubscription) {
+            existingItem.isSubscription = true;
+            existingItem.subscriptionFrequency = subscriptionFrequency;
+        }
     } else {
         cart.push({
             ...product,
             quantity: quantity,
-            isSubscription: isSubscription
+            isSubscription: isSubscription,
+            subscriptionFrequency: subscriptionFrequency
             // Fulfillment type will be selected in the cart
         });
     }
@@ -108,12 +115,23 @@ function addProductToCart() {
     saveCart(cart);
     
     // Show success message
-    showToast(`${quantity} x ${product.name} added to cart!`);
+    const subscriptionMsg = isSubscription ? ` (6-month subscription - ${getFrequencyText(subscriptionFrequency)})` : '';
+    showToast(`${quantity} x ${product.name}${subscriptionMsg} added to cart!`);
     
     // Redirect to cart after short delay
     setTimeout(() => {
         window.location.href = 'cart.html';
     }, 1000);
+}
+
+// Helper function to convert frequency value to readable text
+function getFrequencyText(frequency) {
+    const frequencies = {
+        '2weeks': 'every 2 weeks',
+        '1month': 'monthly',
+        '2months': 'every 2 months'
+    };
+    return frequencies[frequency] || frequency;
 }
 
 // Collapsible sections

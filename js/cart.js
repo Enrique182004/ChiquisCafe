@@ -134,8 +134,8 @@ function displayCart() {
                     <label>
                         <input type="checkbox" id="subscribe-checkbox">
                         <div>
-                            <strong>💎 Subscribe & Save - 6 Months</strong>
-                            <p>Get this coffee delivered automatically for 6 months</p>
+                            <strong>💎 Subscribe & Save 10% - 6 Months</strong>
+                            <p>Get this coffee delivered automatically for 6 months with 10% discount</p>
                         </div>
                     </label>
                     
@@ -147,7 +147,7 @@ function displayCart() {
                             <option value="1month" selected>Every month</option>
                             <option value="2months">Every 2 months</option>
                         </select>
-                        <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem;">Shipping calculated at checkout for each delivery</p>
+                        <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem;">10% discount + shipping will be calculated at checkout for each delivery</p>
                     </div>
                 </div>
                 ` : ''}
