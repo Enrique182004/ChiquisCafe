@@ -324,39 +324,74 @@
     border-bottom: 1px solid var(--border-color);
 }
 
-/* Subscription Option in Summary */
-#subscription-option {
-    background: var(--light-pink);
+/* Discount Code Section */
+#discount-code-section {
+    background: var(--light-color);
     padding: 1.25rem;
     border-radius: 10px;
     margin-bottom: 1.5rem;
-    border: 2px solid var(--accent-pink);
+    border: 2px solid var(--border-color);
 }
 
-#subscription-option label {
-    display: flex;
-    align-items: flex-start;
+#discount-code-section label {
+    display: block;
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.discount-code-input-group {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+}
+
+#discount-code {
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: var(--white);
+    transition: all 0.3s;
+}
+
+#discount-code:focus {
+    outline: none;
+    border-color: var(--accent-pink);
+    box-shadow: 0 0 0 4px rgba(184, 69, 125, 0.15);
+}
+
+.apply-code-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-pink));
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
     cursor: pointer;
-    gap: 0.75rem;
+    transition: all 0.3s;
+    white-space: nowrap;
 }
 
-#subscription-option input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    margin-top: 0.25rem;
-    cursor: pointer;
-    accent-color: var(--primary-color);
+.apply-code-btn:hover {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(184, 69, 125, 0.3);
 }
 
-#subscription-option strong {
-    color: var(--primary-color);
-    font-size: 1.1rem;
-}
-
-#subscription-option p {
+.discount-code-message {
+    margin-top: 0.5rem;
     font-size: 0.9rem;
-    color: var(--text-light);
-    margin: 0.25rem 0 0 0;
+    min-height: 1.2rem;
+}
+
+.discount-code-message.error {
+    color: #d32f2f;
+}
+
+.discount-code-message.success {
+    color: var(--success-color);
 }
 
 .summary-row {
@@ -548,12 +583,24 @@
         font-size: 1.5rem;
     }
     
-    #subscription-option {
+    #discount-code-section {
         padding: 1rem;
     }
     
-    #subscription-option strong {
-        font-size: 1rem;
+    .discount-code-input-group {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    #discount-code {
+        padding: 0.7rem;
+        font-size: 0.95rem;
+    }
+    
+    .apply-code-btn {
+        padding: 0.7rem 1.25rem;
+        font-size: 0.95rem;
+        width: 100%;
     }
 }
 

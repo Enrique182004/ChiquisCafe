@@ -128,25 +128,22 @@ function displayCart() {
             <div class="cart-summary">
                 <h3>Order Summary</h3>
                 
-                <!-- Subscription Option -->
-                ${hasEligibleItems ? `
-                <div id="subscription-option">
-                    <label>
-                        <input type="checkbox" id="subscribe-checkbox">
-                        <div>
-                            <strong>💎 Subscribe & Save 25%!</strong>
-                            <p>Get this order every month for 6 months with 25% discount (Shipping NOT included)</p>
-                        </div>
-                    </label>
+                <!-- Discount Code Section -->
+                <div id="discount-code-section">
+                    <label for="discount-code">🎟️ Have a discount code?</label>
+                    <div class="discount-code-input-group">
+                        <input type="text" id="discount-code" placeholder="Enter code" maxlength="20">
+                        <button type="button" class="apply-code-btn" onclick="applyDiscountCode()">Apply</button>
+                    </div>
+                    <p class="discount-code-message" id="discount-message"></p>
                 </div>
-                ` : ''}
                 
                 <div class="summary-row">
                     <span>Subtotal:</span>
                     <span id="subtotal">$0.00</span>
                 </div>
                 <div class="summary-row" id="discount-row" style="display: none;">
-                    <span>Subscription Discount (25%):</span>
+                    <span>Discount:</span>
                     <span id="discount">-$0.00</span>
                 </div>
                 <div class="summary-row total">
@@ -162,9 +159,41 @@ function displayCart() {
     
     // Now setup event listeners
     setupFulfillmentToggles();
-    setupSubscriptionToggle();
     updateCartSummary();
     checkDeliveryArea();
+}
+
+// Discount code functionality (placeholder - no active codes yet)
+let appliedDiscount = 0;
+let discountCode = '';
+
+function applyDiscountCode() {
+    const codeInput = document.getElementById('discount-code');
+    const code = codeInput.value.trim().toUpperCase();
+    const messageEl = document.getElementById('discount-message');
+    
+    // Clear previous message
+    messageEl.textContent = '';
+    messageEl.className = 'discount-code-message';
+    
+    if (!code) {
+        messageEl.textContent = 'Please enter a code';
+        messageEl.classList.add('error');
+        return;
+    }
+    
+    // For now, no codes are active
+    // In the future, you can add code validation here like:
+    // const validCodes = {
+    //     'WELCOME10': 0.10,  // 10% off
+    //     'SAVE20': 0.20      // 20% off
+    // };
+    
+    messageEl.textContent = 'Invalid code. No active discount codes at the moment.';
+    messageEl.classList.add('error');
+    appliedDiscount = 0;
+    discountCode = '';
+    updateCartSummary();
 }
 
 function setupFulfillmentToggles() {
@@ -195,21 +224,13 @@ function setupFulfillmentToggles() {
     });
 }
 
-function setupSubscriptionToggle() {
-    const subscribeCheckbox = document.getElementById('subscribe-checkbox');
-    if (subscribeCheckbox) {
-        subscribeCheckbox.addEventListener('change', updateCartSummary);
-    }
-}
-
-// Update cart summary with subscription discount
+// Update cart summary with discount code
 function updateCartSummary() {
     const cart = getCart();
-    const subscribeCheckbox = document.getElementById('subscribe-checkbox');
-    const isSubscription = subscribeCheckbox && subscribeCheckbox.checked;
-    
     const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-    const discount = isSubscription ? subtotal * 0.25 : 0;
+    
+    // Apply discount code if any
+    const discount = subtotal * appliedDiscount;
     const total = subtotal - discount;
     
     document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
@@ -217,7 +238,7 @@ function updateCartSummary() {
     
     // Show/hide discount row
     const discountRow = document.getElementById('discount-row');
-    if (isSubscription && discountRow) {
+    if (appliedDiscount > 0 && discountRow) {
         discountRow.style.display = 'flex';
         document.getElementById('discount').textContent = `-$${discount.toFixed(2)}`;
     } else if (discountRow) {
@@ -237,10 +258,6 @@ async function proceedToCheckout(event) {
     
     // Get fulfillment type
     const fulfillmentType = document.querySelector('input[name="fulfillment"]:checked').value;
-    
-    // Get subscription option
-    const subscribeCheckbox = document.getElementById('subscribe-checkbox');
-    const isSubscription = subscribeCheckbox && subscribeCheckbox.checked;
     
     // Validate address if needed
     if (fulfillmentType !== 'PICKUP') {
@@ -263,14 +280,12 @@ async function proceedToCheckout(event) {
         ? document.getElementById('location').value 
         : 'LZ8GQYSRJ8QRV'; // Default to Cafe de Olla main location
     
-    // Apply subscription discount if checked
+    // Apply discount if code was applied
     let finalCart = cart;
-    if (isSubscription) {
+    if (appliedDiscount > 0) {
         finalCart = cart.map(item => ({
             ...item,
-            price: item.price * 0.75, // Apply 25% discount
-            isSubscription: true,
-            subscriptionMonths: 6
+            price: item.price * (1 - appliedDiscount)
         }));
     }
     
@@ -279,7 +294,7 @@ async function proceedToCheckout(event) {
         cart: finalCart,
         fulfillmentType: fulfillmentType,
         locationId: locationId,
-        isSubscription: isSubscription,
+        discountCode: discountCode || null,
         customerInfo: fulfillmentType !== 'PICKUP' ? {
             fullName: document.getElementById('fullName').value,
             phone: document.getElementById('phone').value,

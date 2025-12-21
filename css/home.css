@@ -526,41 +526,44 @@
 /* Responsive - Home Page */
 @media (max-width: 768px) {
     .hero {
-        height: 400px;
+        height: 350px;
         padding: 2rem 1rem;
     }
     
     .hero-content h2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         margin-bottom: 0.5rem;
     }
     
     .hero-content p {
-        font-size: 1.1rem;
+        font-size: 1rem;
         margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
     }
     
-    .featured, .about, .services, .contact, .reviews-preview, .brewing-guide {
-        padding: 2rem 0;
+    .featured, .about, .services, .contact, .reviews-preview, .brewing-guide-cta {
+        padding: 2.5rem 0;
     }
     
     .product-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
+        padding: 0 1rem;
     }
     
     .featured-product-link {
-        padding: 1rem;
+        padding: 1.25rem;
     }
     
     .featured-product-image {
-        height: 300px;
+        height: 280px;
     }
     
     .services-grid,
     .locations-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+        padding: 0 1rem;
     }
     
     .service-card,
@@ -568,14 +571,19 @@
         padding: 1.5rem;
     }
     
+    .about {
+        padding: 2.5rem 0;
+    }
+    
     .about p {
         font-size: 1rem;
-        padding: 0 1rem;
+        padding: 0 1.5rem;
     }
     
     .section-subtitle {
         font-size: 1rem;
         margin: -1rem 0 2rem 0;
+        padding: 0 1rem;
     }
     
     .reviews-grid-preview {
@@ -588,13 +596,18 @@
         padding: 1.5rem;
     }
     
-    /* Brewing Guide CTA Responsive */
+    /* Brewing Guide CTA Mobile */
     .brewing-guide-cta {
-        padding: 2rem 0;
+        padding: 2.5rem 0;
     }
     
     .brewing-guide-cta h2 {
         font-size: 1.6rem;
+        padding: 0 1rem;
+    }
+    
+    .brewing-guide-cta p {
+        padding: 0 1rem;
     }
     
     .brewing-guide-cta .btn-large {
@@ -656,14 +669,42 @@
 }
 
 @media (max-width: 480px) {
+    .hero {
+        height: 300px;
+    }
+    
     .hero-content h2 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
     
     .hero-content p {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
     
+    .product-grid {
+        padding: 0 0.75rem;
+    }
+    
+    .featured-product-link {
+        padding: 1rem;
+    }
+    
+    .featured-product-image {
+        height: 250px;
+    }
+    
+    .services-grid,
+    .locations-grid {
+        padding: 0 0.75rem;
+    }
+    
+    .about p {
+        padding: 0 1rem;
+    }
+    
+    .reviews-grid-preview {
+        padding: 0 0.75rem;
+    }
     
     .location-hours-card {
         padding: 1.5rem 1rem;
@@ -685,6 +726,7 @@
     
     .payment-grid {
         gap: 0.6rem;
+        padding: 0 0.75rem;
     }
     
     .payment-card {
