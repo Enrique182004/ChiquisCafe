@@ -128,6 +128,30 @@ function displayCart() {
             <div class="cart-summary">
                 <h3>Order Summary</h3>
                 
+                <!-- Subscription Option -->
+                ${hasEligibleItems ? `
+                <div id="subscription-option">
+                    <label>
+                        <input type="checkbox" id="subscribe-checkbox">
+                        <div>
+                            <strong>💎 Subscribe & Save - 6 Months</strong>
+                            <p>Get this coffee delivered automatically for 6 months</p>
+                        </div>
+                    </label>
+                    
+                    <!-- Frequency Selection - Only shows when subscribed -->
+                    <div id="subscription-frequency-section" style="display: none;">
+                        <label for="delivery-frequency" style="display: block; margin-top: 1rem; font-weight: 600; color: var(--dark-color);">Delivery Frequency:</label>
+                        <select id="delivery-frequency" style="width: 100%; padding: 0.75rem; margin-top: 0.5rem; border: 2px solid var(--border-color); border-radius: 8px; font-size: 1rem;">
+                            <option value="2weeks">Every 2 weeks</option>
+                            <option value="1month" selected>Every month</option>
+                            <option value="2months">Every 2 months</option>
+                        </select>
+                        <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem;">Shipping calculated at checkout for each delivery</p>
+                    </div>
+                </div>
+                ` : ''}
+                
                 <!-- Discount Code Section -->
                 <div id="discount-code-section">
                     <label for="discount-code">🎟️ Have a discount code?</label>
@@ -146,10 +170,15 @@ function displayCart() {
                     <span>Discount:</span>
                     <span id="discount">-$0.00</span>
                 </div>
+                <div class="summary-row" id="shipping-row" style="display: none;">
+                    <span>Shipping:</span>
+                    <span id="shipping">$0.00</span>
+                </div>
                 <div class="summary-row total">
                     <span>Total:</span>
                     <span id="total">$0.00</span>
                 </div>
+                <p id="shipping-note" style="display: none; font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem; text-align: center;">*Shipping will be calculated at checkout</p>
                 <button class="btn btn-primary" onclick="proceedToCheckout(event)">
                     Proceed to Checkout
                 </button>
@@ -159,8 +188,26 @@ function displayCart() {
     
     // Now setup event listeners
     setupFulfillmentToggles();
+    setupSubscriptionToggle();
     updateCartSummary();
     checkDeliveryArea();
+}
+
+// Setup subscription toggle
+function setupSubscriptionToggle() {
+    const subscribeCheckbox = document.getElementById('subscribe-checkbox');
+    const frequencySection = document.getElementById('subscription-frequency-section');
+    
+    if (subscribeCheckbox) {
+        subscribeCheckbox.addEventListener('change', function() {
+            if (this.checked && frequencySection) {
+                frequencySection.style.display = 'block';
+            } else if (frequencySection) {
+                frequencySection.style.display = 'none';
+            }
+            updateCartSummary();
+        });
+    }
 }
 
 // Discount code functionality (placeholder - no active codes yet)
@@ -229,6 +276,10 @@ function updateCartSummary() {
     const cart = getCart();
     const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
     
+    // Check if subscription is enabled
+    const subscribeCheckbox = document.getElementById('subscribe-checkbox');
+    const isSubscription = subscribeCheckbox && subscribeCheckbox.checked;
+    
     // Apply discount code if any
     const discount = subtotal * appliedDiscount;
     const total = subtotal - discount;
@@ -244,6 +295,14 @@ function updateCartSummary() {
     } else if (discountRow) {
         discountRow.style.display = 'none';
     }
+    
+    // Show/hide shipping note for subscriptions
+    const shippingNote = document.getElementById('shipping-note');
+    if (isSubscription && shippingNote) {
+        shippingNote.style.display = 'block';
+    } else if (shippingNote) {
+        shippingNote.style.display = 'none';
+    }
 }
 
 // Proceed to checkout
@@ -258,6 +317,11 @@ async function proceedToCheckout(event) {
     
     // Get fulfillment type
     const fulfillmentType = document.querySelector('input[name="fulfillment"]:checked').value;
+    
+    // Get subscription option
+    const subscribeCheckbox = document.getElementById('subscribe-checkbox');
+    const isSubscription = subscribeCheckbox && subscribeCheckbox.checked;
+    const deliveryFrequency = isSubscription ? document.getElementById('delivery-frequency').value : null;
     
     // Validate address if needed
     if (fulfillmentType !== 'PICKUP') {
@@ -295,6 +359,13 @@ async function proceedToCheckout(event) {
         fulfillmentType: fulfillmentType,
         locationId: locationId,
         discountCode: discountCode || null,
+        isSubscription: isSubscription,
+        subscriptionData: isSubscription ? {
+            duration: 6, // 6 months
+            frequency: deliveryFrequency,
+            // Shipping will be calculated by Shippo API later
+            shippingRequired: true
+        } : null,
         customerInfo: fulfillmentType !== 'PICKUP' ? {
             fullName: document.getElementById('fullName').value,
             phone: document.getElementById('phone').value,

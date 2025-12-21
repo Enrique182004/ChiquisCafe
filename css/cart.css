@@ -324,6 +324,52 @@
     border-bottom: 1px solid var(--border-color);
 }
 
+/* Subscription Option in Summary */
+#subscription-option {
+    background: var(--light-pink);
+    padding: 1.25rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    border: 2px solid var(--accent-pink);
+}
+
+#subscription-option > label {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    gap: 0.75rem;
+}
+
+#subscription-option input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 0.25rem;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+#subscription-option strong {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+#subscription-option p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin: 0.25rem 0 0 0;
+}
+
+#subscription-frequency-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--accent-pink);
+}
+
+#subscription-frequency-section select {
+    background: var(--white);
+}
+
 /* Discount Code Section */
 #discount-code-section {
     background: var(--light-color);
@@ -581,6 +627,14 @@
     
     .summary-row.total {
         font-size: 1.5rem;
+    }
+    
+    #subscription-option {
+        padding: 1rem;
+    }
+    
+    #subscription-option strong {
+        font-size: 1rem;
     }
     
     #discount-code-section {
