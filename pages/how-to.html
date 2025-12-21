@@ -46,26 +46,16 @@
         <section class="how-to-hero">
             <div class="container">
                 <h1>☕ How to Brew Chiquis Café de Olla</h1>
-                <p>Follow these simple steps to make authentic Mexican coffee at home</p>
+                <p>Follow these simple steps to make authentic Mexican coffee using a coffee maker</p>
             </div>
         </section>
 
-        <!-- Brewing Methods -->
+        <!-- Brewing Method -->
         <section class="brewing-methods">
             <div class="container">
-                <div class="method-tabs">
-                    <button class="method-tab active" onclick="showMethod('coffee-maker')">
-                        Coffee Maker
-                    </button>
-                    <button class="method-tab" onclick="showMethod('traditional')">
-                        Traditional Method
-                    </button>
-                </div>
-
-                <!-- Coffee Maker Method -->
-                <div id="coffee-maker" class="method-content active">
-                    <h2>Using a Coffee Maker</h2>
-                    <p class="method-intro">Our Café de Olla works perfectly with modern coffee makers and French presses. Here's how:</p>
+                <div class="method-content active">
+                    <h2>Brewing with a Coffee Maker</h2>
+                    <p class="method-intro">Our Café de Olla is designed to work perfectly with modern coffee makers and French presses. No instant coffee here - this is real, ground coffee that needs to be brewed!</p>
                     
                     <div class="steps-grid">
                         <!-- Step 1 -->
@@ -76,7 +66,7 @@
                             <div class="step-details">
                                 <div class="step-number">1</div>
                                 <h3>Measure Your Coffee</h3>
-                                <p>Add 2 tablespoons of Chiquis Café de Olla grounds to your coffee maker's filter or French press.</p>
+                                <p>Add 2 tablespoons of Chiquis Café de Olla grounds to your coffee maker's filter or French press. This is freshly ground coffee, not instant!</p>
                             </div>
                         </div>
 
@@ -88,7 +78,7 @@
                             <div class="step-details">
                                 <div class="step-number">2</div>
                                 <h3>Add Water & Brew</h3>
-                                <p>Add hot water (just off boil) for every cup. Let it brew for 4-5 minutes for optimal flavor extraction.</p>
+                                <p>Add hot water (just off boil) for every cup. Let it brew for 4-5 minutes for optimal flavor extraction. The brewing process brings out all the delicious cinnamon and piloncillo flavors.</p>
                             </div>
                         </div>
 
@@ -107,57 +97,14 @@
                         <div class="tip-text">
                             <h4>Pro Tips</h4>
                             <ul>
+                                <li><strong>Not Instant Coffee:</strong> This is real, freshly ground coffee that must be brewed</li>
                                 <li>Use filtered water for the best taste</li>
                                 <li>For stronger coffee, use 3 tablespoons per cup</li>
                                 <li>Serve in traditional clay mugs (jarros de barro) for authentic experience</li>
                                 <li>Best enjoyed fresh - brew only what you'll drink immediately</li>
+                                <li>Works with coffee makers, French presses, or pour-over methods</li>
                             </ul>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Traditional Method -->
-                <div id="traditional" class="method-content">
-                    <h2>Traditional Clay Pot Method (Olla de Barro)</h2>
-                    <p class="method-intro">For the most authentic Café de Olla experience, use a traditional clay pot:</p>
-                    
-                    <div class="traditional-steps">
-                        <div class="traditional-step">
-                            <div class="step-number">1</div>
-                            <div class="step-info">
-                                <h3>Boil Water in Clay Pot</h3>
-                                <p>Fill your clay pot (olla de barro) with water and bring to a rolling boil over medium heat.</p>
-                            </div>
-                        </div>
-
-                        <div class="traditional-step">
-                            <div class="step-number">2</div>
-                            <div class="step-info">
-                                <h3>Add Coffee Grounds</h3>
-                                <p>Add 2 tablespoons of Chiquis Café de Olla per cup of water. Stir gently to combine.</p>
-                            </div>
-                        </div>
-
-                        <div class="traditional-step">
-                            <div class="step-number">3</div>
-                            <div class="step-info">
-                                <h3>Simmer</h3>
-                                <p>Reduce heat and let simmer for 3-5 minutes. Watch carefully to prevent boiling over.</p>
-                            </div>
-                        </div>
-
-                        <div class="traditional-step">
-                            <div class="step-number">4</div>
-                            <div class="step-info">
-                                <h3>Strain & Serve</h3>
-                                <p>Remove from heat, strain through a fine mesh strainer, and serve hot in clay mugs.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="traditional-note">
-                        <h4>🏺 Why Clay Pots?</h4>
-                        <p>Traditional clay pots (ollas de barro) are porous and retain heat beautifully, enhancing the coffee's rich flavors and creating an authentic Mexican coffee experience that's been passed down through generations.</p>
                     </div>
                 </div>
             </div>
@@ -193,24 +140,5 @@
     </footer>
 
     <script src="../js/main.js"></script>
-    <script>
-        function showMethod(methodId) {
-            // Hide all method contents
-            document.querySelectorAll('.method-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            // Remove active class from all tabs
-            document.querySelectorAll('.method-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show selected method
-            document.getElementById(methodId).classList.add('active');
-            
-            // Add active class to clicked tab
-            event.target.classList.add('active');
-        }
-    </script>
 </body>
 </html>
